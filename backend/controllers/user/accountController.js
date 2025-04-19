@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 
 function generateToken(email) {
     const token = jwt.sign({ email }, process.env.JWT_SECURITY_KEY, { expiresIn: '1h' });
+
+    return token;
 }
 
 async function login(request, response) {

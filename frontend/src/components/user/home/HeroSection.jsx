@@ -54,6 +54,7 @@ const HeroSection = () => {
                 variant="outlined"
                 id="job"
                 value={input.job}
+                required
                 onChange={handleChange}
                 slotProps={{
                     input:{

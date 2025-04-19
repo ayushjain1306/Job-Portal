@@ -1,11 +1,11 @@
 import axios from "axios";
 import { URL } from "../../utils/backendUrl";
 
-async function getCompanies() {
+async function getFields() {
     try {
-        const result = await axios.get(`${URL}/get-top-companies`);
+        const result = await axios.get(`${URL}/get-top-fields`);
 
-        return result;
+        return result.data;
     }
     catch (error) {
         return [];
@@ -13,5 +13,5 @@ async function getCompanies() {
 }
 
 export {
-    getCompanies
+    getFields
 }
