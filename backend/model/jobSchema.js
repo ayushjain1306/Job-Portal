@@ -11,7 +11,7 @@ const jobSchema = new mongoose.Schema({
         required: true
     },
     type: {
-        type: Number,
+        type: String,
         required: true
     },
     salary: {
@@ -33,7 +33,7 @@ const jobSchema = new mongoose.Schema({
     },
     job_status: {
         type: String,
-        required: true
+        default: "Pending"
     }
 });
 

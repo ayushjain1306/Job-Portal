@@ -38,12 +38,12 @@ const HeadTypo = styled(Typography)(({theme}) => ({
 
 const OutletBox = styled(Box)(({ theme }) => ({
     height: "96vh",
-    width: "83%",
-    padding: "2vh 2vw",
+    width: "79%",
+    padding: "2vh 2%",
     paddingTop: "2vh",
     overflowY: "auto",
     [theme.breakpoints.down('sm')]: {
-        width: "100vw"
+        width: "100%"
     },
     [theme.breakpoints.between('sm', 'lg')]: {
         width: "75vw"
@@ -62,10 +62,10 @@ const StyledMenu = styled(Menu)(({theme}) => ({
 const elements = [
     { id: "6", name: "Your Profile", url: "profile", Component: Person },
     { id: "1", name: "Dashboard", url: "", Component: Dashboard  },
-    { id: "4", name: "Wallet", url: "categories", Component: AccountBalance  },
-    { id: "3", name: "Subsciptions", url: "products", Component: Payments  },
-    { id: "2", name: "Jobs", url: "orders", Component: Work  },
-    { id: "5", name: "Skills", url: "product-reviews", Component: DeveloperMode  }
+    { id: "4", name: "Wallet", url: "wallet", Component: AccountBalance  },
+    { id: "3", name: "Subsciptions", url: "subscriptions", Component: Payments  },
+    { id: "2", name: "Jobs", url: "jobs", Component: Work  },
+    { id: "5", name: "Skills", url: "skills", Component: DeveloperMode  }
 ]
 
 const AdminDashboard = () => {

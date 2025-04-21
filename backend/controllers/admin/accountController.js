@@ -60,4 +60,25 @@ async function getAdminAccountDetails(request, response) {
     }
 }
 
-export { adminLogin, adminLogout, getAdminAccountDetails }
+async function changeAdminCredentials(request, response) {
+    try {
+        const username = request.username;
+
+        const admin = await Admin.findOne({ username });
+
+        const { password, credentials } = request.body;
+
+        if (admin.password !== password) {
+            return response.status(403).json({ message: "Invalid Password." });
+        }
+
+        await Admin.updateOne({ _id: admin._id }, credentials);
+
+        return response.status(200).json({ message: "Credentials Updated Successfully." });
+    }
+    catch (error) {
+        return response.status(500).json({ message: error.message });
+    }
+}
+
+export { adminLogin, adminLogout, getAdminAccountDetails, changeAdminCredentials }

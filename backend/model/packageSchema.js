@@ -5,13 +5,21 @@ const packageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    price: {
+    package_description: {
         type: String,
+        required: true
+    },
+    price: {
+        type: Number,
         required: true
     },
     months: {
         type: Number,
         required: true
+    },
+    delete_status: {
+        type: Boolean,
+        default: false
     }
 });
 
