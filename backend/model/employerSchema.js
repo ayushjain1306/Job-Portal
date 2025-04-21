@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Packages from "./packageSchema.js";
 
 const employerSchema = new mongoose.Schema({
     name: {
@@ -26,8 +27,15 @@ const employerSchema = new mongoose.Schema({
         required: true
     },
     company_website: {
-        type: String,
-        required: true
+        type: String
+    },
+    subscription_plan: {
+        type: mongoose.Schema.ObjectId,
+        ref: Packages
+    },
+    last_date_plan: {
+        type: Date,
+        default: null
     }
 });
 

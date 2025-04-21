@@ -1,8 +1,9 @@
-import React from 'react'
+import React from "react"
+import JobBox from './JobBox';
 
 const EmployerJobs = () => {
   return (
-    <div>EmployerJobs</div>
+    <JobBox />
   )
 }
 
