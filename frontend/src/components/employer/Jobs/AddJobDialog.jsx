@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { Backdrop, CircularProgress, MenuItem, Dialog, DialogContent, DialogActions, DialogTitle, Button, TextField, styled } from '@mui/material';
+import { Box, Backdrop, CircularProgress, MenuItem, Dialog, DialogContent, DialogActions, DialogTitle, Button, TextField, styled, Chip } from '@mui/material';
 import { createJob } from '../../../services/employer/jobs';
 import Swal from "sweetalert2";
 
 const NewTextField = styled(TextField)(({theme}) => ({
     width: "25vw"
 }))
+const AnotherTextField = styled(TextField)(({theme}) => ({
+    width: "20vw"
+}))
 
 const AddJobDialog = ({ open, setOpen }) => {
-  const [input, setInput] = useState({ job_title: "", job_description: "", type: "", salary: "", duration: "", questions: "" });
+  const [input, setInput] = useState({ job_title: "", skills: [], job_description: "", type: "", salary: "", duration: "", questions: "" });
   const [loading, setLoading] = useState(false);
+  const [skill, setSkill] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +31,7 @@ const AddJobDialog = ({ open, setOpen }) => {
         })
     }
     else {
-        // setOpen(false);
+        setOpen(false);
         Swal.fire({
             title: "Error",
             icon: "error",
@@ -37,7 +41,25 @@ const AddJobDialog = ({ open, setOpen }) => {
   } 
 
   const handleChange = (e) => {
-    setInput({ ...input, [e.target.id]: e.target.value });
+    if (e.target.id === "skill") {
+        setSkill(e.target.value);
+        return;
+    }
+
+    if (e.target.name === "type") setInput({ ...input, type: e.target.value });
+    else setInput({ ...input, [e.target.id]: e.target.value });
+  }
+
+  const handleAddSkill = (e) => {
+    if (skill === "") return;
+
+    setInput({ ...input, skills: [ ...input.skills, skill ] });
+
+    setSkill("")
+  }
+
+  const handleDelete = (skill) => {
+    setInput({ ...input, skills: input.skills.filter((element) => element !== skill) });
   }
 
   return (
@@ -86,7 +108,7 @@ const AddJobDialog = ({ open, setOpen }) => {
                     type="text"
                     select
                     size="small"
-                    id="type"
+                    name="type"
                     value={input.type}
                     onChange={handleChange}
                     required
@@ -104,6 +126,21 @@ const AddJobDialog = ({ open, setOpen }) => {
                     onChange={handleChange}
                     required
                 /> <br />
+                {
+                    input.skills.length > 0 &&
+                    input.skills.map((skill, index) => <Chip label={skill} key={index} onDelete={() => handleDelete(skill)} />)
+                }
+                <Box style={{ display: "flex", alignItems: "center" }}>
+                    <AnotherTextField 
+                        margin="normal"
+                        label="Skills Required"
+                        type="text"
+                        size="small"
+                        id="skill"
+                        value={skill}
+                        onChange={handleChange}
+                    /> <Button onClick={handleAddSkill}>Add</Button> <br />
+                    </Box>
                 <NewTextField 
                     margin="normal"
                     label="Ask the Question"
@@ -117,7 +154,7 @@ const AddJobDialog = ({ open, setOpen }) => {
                 /> <br />
             </DialogContent>
             <DialogActions>
-                <Button variant="contained" color="primary">Cancel</Button>
+                <Button variant="contained" color="primary" onClick={() => setOpen(false)}>Cancel</Button>
                 <Button variant="contained" color="warning" type="submit">Add Job</Button>
             </DialogActions>
         </form>

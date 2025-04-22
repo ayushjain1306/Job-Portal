@@ -42,23 +42,6 @@ const NewTextField = styled(TextField)(({ theme }) => ({
   width: "20%"
 }))
 
-const elements = [
-  {
-    id: 1,
-    package_name: "Basic Plan",
-    package_description: "The basic plans for employers hiring using our services first time.",
-    price: "500",
-    months: 1
-  },
-  {
-    id: 2,
-    package_name: "Premium Plan",
-    package_description: "The basic plans for employers hiring using our services first time.",
-    price: "2000",
-    months: 3
-  }
-]
-
 const filters = [
   {
     value: "All",
@@ -111,7 +94,7 @@ const AdminJobs = () => {
   }
 
   const handleView = () => {
-
+    
   }
 
   return (

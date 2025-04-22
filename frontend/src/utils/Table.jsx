@@ -10,7 +10,7 @@ const Table = ({ data, headers, targets, actions, handleDelete, handleEdit, hand
                 {
                     headers.map((element, index) => {
                         return (
-                            <TableCell key={index} style={{ fontWeight: "bold" }}>{element}</TableCell>
+                            <TableCell align="center" key={index} style={{ fontWeight: "bold" }}>{element}</TableCell>
                         )
                     })
                 }
@@ -18,18 +18,18 @@ const Table = ({ data, headers, targets, actions, handleDelete, handleEdit, hand
         </TableHead>
         <TableBody>
             {
-                data.map((element) => {
+                data.map((element, ind) => {
                     return (
                         <TableRow key={element._id}>
                             {
                                 targets.map((target, index) => {
                                     return (
                                         target === "action" ?
-                                            <TableCell key={index}>
+                                            <TableCell align="center" key={index}>
                                                 {
                                                     actions.map((act, index) => {
                                                         return (
-                                                            <Button key={index} variant="outlined" color="primary" onClick={ act === "Delete" ? handleDelete : act === "Edit" ? handleEdit : handleView }>
+                                                            <Button key={index} variant="outlined" color="primary" onClick={ () => act === "Delete" ? handleDelete(element._id) : act === "Edit" ? handleEdit(element._id) : handleView(element._id) }>
                                                                 {
                                                                     act === "Delete" 
                                                                     ?
@@ -48,9 +48,9 @@ const Table = ({ data, headers, targets, actions, handleDelete, handleEdit, hand
                                             </TableCell>
                                         :
                                         target === "Sr. No." ?
-                                        <TableCell key={index}>{index+1}</TableCell>
+                                        <TableCell align="center" key={index}>{ind+1}</TableCell>
                                         :
-                                        <TableCell key={index}>{element[target]}</TableCell>
+                                        <TableCell align="center" key={index}>{element[target]}</TableCell>
                                     )
                                 })
                             }

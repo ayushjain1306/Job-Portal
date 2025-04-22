@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Box, styled } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const FirstSection = styled(Box)(({theme}) => ({
     width: "30%",
@@ -20,7 +21,7 @@ const Header = ({ InsideSecondSection }) => {
     <AppBar style={{ backgroundColor: "white", height: "10vh", width: "100%", color: "black" }}>
         <Toolbar style={{ backgroundColor: "white", display: "flex", justifyContent: "space-between", height: "10vh", width: "100%", color: "black", padding: 0, margin: 0 }}>
             <FirstSection>
-                Company Name and Logo
+                <Link to="/" style={{ color: "inherit", textDecoration: 'inherit' }}>Company Name and Logo</Link>
             </FirstSection>
             <SecondSection>
                 <InsideSecondSection />

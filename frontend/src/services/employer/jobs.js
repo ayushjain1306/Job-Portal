@@ -23,4 +23,15 @@ async function createJob(jobDetails) {
     }
 }
 
-export { getEmployerJobs, createJob }
+async function changeJobStatus(id) {
+    try {
+        await axios.put(`${URL}/employer-change-job-status`, { id }, { withCredentials: true });
+
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+}
+
+export { getEmployerJobs, createJob, changeJobStatus }

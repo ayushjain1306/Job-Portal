@@ -54,7 +54,7 @@ const InsideSection = () => {
     return (
       <React.Fragment>
         <Link style={LinkStyle} to="/employer"><Home style={{marginRight: "5px"}} />Home</Link>
-        <Link style={LinkStyle} to="/employer"><Payment style={{marginRight: "5px"}} />Your Payments</Link>
+        <Link style={LinkStyle} to="/employer/payments"><Payment style={{marginRight: "5px"}} />Your Payments</Link>
         <Link style={LinkStyle} to="/employer/jobs"><Work style={{marginRight: "5px"}} />Your Jobs</Link>
         {
           employer ? 

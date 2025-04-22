@@ -18,6 +18,7 @@ import AdminWallet from './components/admin/dashboard/wallet/AdminWallet';
 import EmployerLogin from './components/employer/account/EmployerLogin';
 import EmployerRegistration from './components/employer/account/EmployerRegistration';
 import EmployerCommon from './components/employer/EmployerCommon';
+import EmployerPayments from './components/employer/payment/EmployerPayments';
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
               <Route path='/employer' element={<EmployerCommon />}>
                 <Route index element={<Employer />} />
                 <Route path='jobs' element={<EmployerJobs />} />
+                <Route path='payments' element={<EmployerPayments />} />
               </Route>
               <Route path='/employer/login' element={<EmployerLogin />} />
               <Route path='/employer/registration' element={<EmployerRegistration />} />

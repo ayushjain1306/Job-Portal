@@ -19,8 +19,8 @@ const jobSchema = new mongoose.Schema({
         default: 0
     },
     questions: {
-        type: Array,
-        default: []
+        type: String,
+        required: true
     },
     duration: {
         type: String,
@@ -34,6 +34,14 @@ const jobSchema = new mongoose.Schema({
     job_status: {
         type: String,
         default: "Pending"
+    },
+    skills: {
+        type: Array,
+        required: true
+    },
+    close_status: {
+        type: Boolean,
+        default: false
     }
 });
 

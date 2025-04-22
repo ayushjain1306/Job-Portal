@@ -7,7 +7,9 @@ import { adminLogin, adminLogout, changeAdminCredentials, getAdminAccountDetails
 import { addAdminSubscriptions, deleteAdminSubscriptions, getAdminSubscriptions } from "../controllers/admin/subscriptions.js";
 import { getAdminJobs, updateAdminJobs } from "../controllers/admin/jobs.js";
 import { getEmployerDetails, login as employerLogin, logout as employerLogout, registration as employerRegistration } from "../controllers/employer/accountController.js";
-import { addEmployerJob, getEmployerJobs } from "../controllers/employer/jobsController.js";
+import { addEmployerJob, changeJobStatus, getEmployerJobs } from "../controllers/employer/jobsController.js";
+import { addSkill, deleteSkill, getSkills } from "../controllers/admin/skills.js";
+import { getSubsriptionPlans, payment } from "../controllers/employer/paymentsController.js";
 
 const router = express.Router();
 
@@ -30,6 +32,9 @@ router.post('/admin-add-subscription', adminAuth, addAdminSubscriptions);
 router.delete('/admin-delete-subscription', adminAuth, deleteAdminSubscriptions);
 router.get('/admin-get-all-jobs', adminAuth, getAdminJobs);
 router.put('/admin-update-job-status', adminAuth, updateAdminJobs);
+router.get('/admin-get-all-skills', adminAuth, getSkills);
+router.post('/admin-add-skill', adminAuth, addSkill);
+router.delete('/admin-delete-skill', adminAuth, deleteSkill);
 
 // Employer Routes
 router.post('/employer-login', employerLogin);
@@ -37,6 +42,9 @@ router.post('/employer-registration', employerRegistration);
 router.delete('/employer-login', employerAuth, employerLogout);
 router.get("/employer-get-details", employerAuth, getEmployerDetails);
 router.get("/employer-get-all-jobs", employerAuth, getEmployerJobs);
-router.get("/employer-add-jobs", employerAuth, addEmployerJob);
+router.post("/employer-add-job", employerAuth, addEmployerJob);
+router.put("/employer-change-job-status", employerAuth, changeJobStatus);
+router.get("/employer-get-all-subscription-plans", employerAuth, getSubsriptionPlans);
+router.post('/employer-purchase-subscription', employerAuth, payment);
 
 export default router;
