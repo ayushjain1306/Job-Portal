@@ -14,7 +14,7 @@ async function getJobs() {
 
 async function updateJobs(id, updatedStatus) {
     try {
-        await axios.post(`${URL}/admin-update-job-status`, { id, updatedStatus }, { withCredentials: true });
+        await axios.put(`${URL}/admin-update-job-status`, { _id: id, updatedStatus }, { withCredentials: true });
 
         return true;
     }

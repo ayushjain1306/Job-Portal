@@ -34,7 +34,7 @@ async function adminLogin(request, response) {
 
 async function adminLogout(request, response) {
     try {
-        response.cookie("token", token, {
+        response.clearCookie("token", {
             httpOnly: "true",
             secure: true,
             sameSite: "none"

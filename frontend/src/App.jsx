@@ -44,8 +44,7 @@ const App = () => {
                   <Route path='profile' element={<AdminProfile />} />
                   <Route path='jobs' element={<AdminJobs />} />
                   <Route path='subscriptions' element={<AdminSub />} />
-                  <Route path='skills' element={<AdminSkills />} />
-                  <Route path='wallet' element={<AdminWallet />} />
+                  <Route path='payments' element={<AdminWallet />} />
                 </Route>
                 <Route path='login' element={<AdminLogin />} />
               </Route>

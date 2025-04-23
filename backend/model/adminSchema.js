@@ -20,6 +20,10 @@ const adminSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
+    },
+    date_created: {
+        type: Date,
+        default: new Date()
     }
 });
 

@@ -17,6 +17,10 @@ const paymentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    date_created: {
+        type: Date,
+        default: new Date()
+    }
 })
 
 const Payments = mongoose.model("payments", paymentSchema);

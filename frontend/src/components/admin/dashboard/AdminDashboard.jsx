@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box, Backdrop, Table, TableBody, TableCell, TableRow, CircularProgress, styled, Typography } from "@mui/material";
-import { getAdminData } from "../../../services/admin/adminAccount";
+import { adminLogout, getAdminData } from "../../../services/admin/adminAccount";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AdminContext } from '../../../context/admin/AdminProvider';
-import { AccountBalance, Dashboard, DeveloperMode, Logout, Payments, Person, Work, Menu } from '@mui/icons-material';
+import { AccountBalance, Dashboard, Logout, Payments, Person, Work, Menu } from '@mui/icons-material';
+import Swal from "sweetalert2";
 
 const NewBox = styled(Box)(({theme}) => ({
     display: "flex",
@@ -62,10 +63,9 @@ const StyledMenu = styled(Menu)(({theme}) => ({
 const elements = [
     { id: "6", name: "Your Profile", url: "profile", Component: Person },
     { id: "1", name: "Dashboard", url: "", Component: Dashboard  },
-    { id: "4", name: "Wallet", url: "wallet", Component: AccountBalance  },
+    { id: "4", name: "Payments", url: "payments", Component: AccountBalance  },
     { id: "3", name: "Subsciptions", url: "subscriptions", Component: Payments  },
     { id: "2", name: "Jobs", url: "jobs", Component: Work  },
-    { id: "5", name: "Skills", url: "skills", Component: DeveloperMode  }
 ]
 
 const AdminDashboard = () => {
@@ -86,6 +86,15 @@ const AdminDashboard = () => {
 
     fetchAdminData();
   }, []);
+
+  const handleClick = async () => {
+    setLoading(true);
+    const result = await adminLogout();
+    setLoading(false);
+
+    if (result) navigate("/admin/login");
+    else Swal.fire({ title: "Error", icon: "error", text: "Failed to logout. Try Again Later." });
+  }
 
   return (
     <Box>
@@ -124,7 +133,7 @@ const AdminDashboard = () => {
                                 <TableRow><TableCell></TableCell></TableRow>
                                 <TableRow>
                                     <TableCell style={{textAlign: "left"}}>
-                                        <Link style={{color: "inherit", fontWeight: "600", textDecoration: "inherit", display: "flex", alignItems: "center"}} onClick={() => handleClick()}>
+                                        <Link style={{color: "inherit", fontWeight: "600", textDecoration: "inherit", display: "flex", alignItems: "center"}} onClick={handleClick}>
                                             <Logout fontSize="small" style={{marginRight: "10px"}} /> Logout
                                         </Link>
                                     </TableCell>

@@ -186,7 +186,7 @@ const JobBox = () => {
     </NewBox>
     :
     <NewBox>
-        { () => navigate("/employer/login") }
+        <NavigateComponent />
     </NewBox>
   )
 }
@@ -229,5 +229,13 @@ const ChangeJobStatus = ({ open, setOpen, _id }) => {
       </Dialog>
     )
   }
+
+const NavigateComponent = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => navigate("/employer/login"), []);
+
+    return null;
+}
 
 export default JobBox

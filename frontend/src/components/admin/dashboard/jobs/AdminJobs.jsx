@@ -3,6 +3,7 @@ import { Box, Button, Backdrop, MenuItem, Typography, CircularProgress, styled, 
 import Swal from "sweetalert2";
 import { getJobs } from '../../../../services/admin/adminJobs';
 import Table from "../../../../utils/Table";
+import ViewJobsDialog from './ViewJobsDialog';
 
 const HeadBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -67,6 +68,8 @@ const actions = [ "View" ]
 const AdminJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [job, setJob] = useState(false);
   const [filter, setFilter] = useState("All");
   const [filteredJobs, setFilteredJobs] = useState([]);
 
@@ -93,8 +96,10 @@ const AdminJobs = () => {
     setFilteredJobs(jobs.filter((job) => job.job_status === e.target.value));  
   }
 
-  const handleView = () => {
-    
+  const handleView = (job) => {
+    setJob(job);
+
+    setOpen(true);
   }
 
   return (
@@ -130,6 +135,10 @@ const AdminJobs = () => {
           
         }
       </JobBox>
+
+      {
+        open && <ViewJobsDialog open={open} setOpen={setOpen} job={job} />
+      }
     </Box>
   )
 }

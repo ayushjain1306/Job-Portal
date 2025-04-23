@@ -29,7 +29,7 @@ const Table = ({ data, headers, targets, actions, handleDelete, handleEdit, hand
                                                 {
                                                     actions.map((act, index) => {
                                                         return (
-                                                            <Button key={index} variant="outlined" color="primary" onClick={ () => act === "Delete" ? handleDelete(element._id) : act === "Edit" ? handleEdit(element._id) : handleView(element._id) }>
+                                                            <Button key={index} variant="outlined" color="primary" onClick={ () => act === "Delete" ? handleDelete(element._id) : act === "Edit" ? handleEdit(element) : handleView(element) }>
                                                                 {
                                                                     act === "Delete" 
                                                                     ?

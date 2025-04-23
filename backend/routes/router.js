@@ -10,6 +10,8 @@ import { getEmployerDetails, login as employerLogin, logout as employerLogout, r
 import { addEmployerJob, changeJobStatus, getEmployerJobs } from "../controllers/employer/jobsController.js";
 import { addSkill, deleteSkill, getSkills } from "../controllers/admin/skills.js";
 import { getSubsriptionPlans, payment } from "../controllers/employer/paymentsController.js";
+import { getAllPayments } from "../controllers/admin/paymentsController.js";
+import { getDashboardData, getSalesData, getTopSellingSubscriptions, getYears } from "../controllers/admin/dashboardController.js";
 
 const router = express.Router();
 
@@ -35,6 +37,11 @@ router.put('/admin-update-job-status', adminAuth, updateAdminJobs);
 router.get('/admin-get-all-skills', adminAuth, getSkills);
 router.post('/admin-add-skill', adminAuth, addSkill);
 router.delete('/admin-delete-skill', adminAuth, deleteSkill);
+router.get('/admin-get-all-payments', adminAuth, getAllPayments);
+router.get('/admin-get-years', adminAuth, getYears);
+router.get('/admin-get-sales-data', adminAuth, getSalesData);
+router.get('/admin-get-top-selling-subscriptions', adminAuth, getTopSellingSubscriptions);
+router.get('/admin-get-dashboard-data', adminAuth, getDashboardData);
 
 // Employer Routes
 router.post('/employer-login', employerLogin);

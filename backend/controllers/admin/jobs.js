@@ -2,7 +2,7 @@ import Jobs from "../../model/jobSchema.js";
 
 async function getAdminJobs(request, response) {
     try {
-        const jobs = await Jobs.find({});
+        const jobs = await Jobs.find({}).sort({"_id": -1});
 
         return response.status(200).json(jobs);
     }

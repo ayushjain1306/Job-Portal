@@ -87,6 +87,8 @@ const AddJobDialog = ({ open, setOpen }) => {
                     label="Job Description"
                     type="text"
                     size="small"
+                    multiline
+                    rows={4}
                     id="job_description"
                     value={input.job_description}
                     onChange={handleChange}
