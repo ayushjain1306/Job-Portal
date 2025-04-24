@@ -2,7 +2,7 @@ import express from "express";
 import userAuth from "../middleware/userAuth.js";
 import adminAuth from "../middleware/adminAuth.js";
 import employerAuth from "../middleware/employerAuth.js";
-import { login, logout, signup } from "../controllers/user/accountController.js";
+import { getUserDetails, login, logout, signup } from "../controllers/user/accountController.js";
 import { adminLogin, adminLogout, changeAdminCredentials, getAdminAccountDetails } from "../controllers/admin/accountController.js";
 import { addAdminSubscriptions, deleteAdminSubscriptions, getAdminSubscriptions } from "../controllers/admin/subscriptions.js";
 import { getAdminJobs, updateAdminJobs } from "../controllers/admin/jobs.js";
@@ -12,6 +12,7 @@ import { addSkill, deleteSkill, getSkills } from "../controllers/admin/skills.js
 import { getSubsriptionPlans, payment } from "../controllers/employer/paymentsController.js";
 import { getAllPayments } from "../controllers/admin/paymentsController.js";
 import { getDashboardData, getSalesData, getTopSellingSubscriptions, getYears } from "../controllers/admin/dashboardController.js";
+import { addEducation, addExperience, addProject, addSkill as addSkills, deleteEducation, deleteExperience, deleteProject, deleteSkill as deleteSkills } from "../controllers/user/profileController.js";
 
 const router = express.Router();
 
@@ -23,6 +24,15 @@ router.get('/', (request, response) => {
 router.post('/user-login', login);
 router.post('/user-signup', signup);
 router.delete('/user-logout', userAuth, logout);
+router.get('/user-get-account-details', userAuth, getUserDetails);
+router.post('/user-add-experience', userAuth, addExperience);
+router.post('/user-add-education', userAuth, addEducation);
+router.post('/user-add-skill', userAuth, addSkills);
+router.post('/user-add-project', userAuth, addProject);
+router.post('/user-delete-experience', userAuth, deleteExperience);
+router.post('/user-delete-education', userAuth, deleteEducation);
+router.post('/user-delete-skill', userAuth, deleteSkills);
+router.post('/user-delete-project', userAuth, deleteProject);
 
 // Admin Routes
 router.get('/admin-get-account-details', adminAuth, getAdminAccountDetails);

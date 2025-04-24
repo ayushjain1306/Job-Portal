@@ -72,4 +72,17 @@ async function logout(request, response) {
     }
 }
 
-export { login, signup, logout }
+async function getUserDetails(request, response) {
+    try {
+        const email = request.email;
+
+        const user = await Users.findOne({ email }, "-password");
+
+        return response.status(200).json(user);
+    }
+    catch (error){
+        return response.status(500).json({ message: error.message });
+    }
+}
+
+export { login, signup, logout, getUserDetails }
