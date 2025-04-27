@@ -3,7 +3,7 @@ import Job from "./jobSchema.js";
 import User from "./userSchema.js";
 
 const jobSchema = new mongoose.Schema({
-    applicant: {
+    user_id: {
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: User
@@ -12,25 +12,21 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    type: {
-        type: Number,
-        required: true
-    },
-    resume: {
-        type: String,
-        default: ""
-    },
     answers_to_questions: {
-        type: Array,
-        default: []
+        type: String,
+        required: true
     },
     job_id: {
         type: mongoose.Schema.ObjectId,
         required: true,
         ref: Job
+    },
+    application_status: {
+        type: "String",
+        default: "Pending"
     }
 });
 
-const Jobs = mongoose.model("job", jobSchema);
+const JobApplications = mongoose.model("jobapplication", jobSchema);
 
-export default Jobs;
+export default JobApplications;

@@ -1,4 +1,5 @@
 import User from "../../model/userSchema.js";
+import cloudinary from "../../cloudinary/cloudinary.js";
 
 async function addExperience(request, response) {
     try {
@@ -6,7 +7,7 @@ async function addExperience(request, response) {
 
         const experience = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $push: { experience: experience } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $push: { experience: experience } }, { new: true });
         
         return response.status(200).json({ message: "Experience Added Successfully." });
     }
@@ -21,7 +22,7 @@ async function addEducation(request, response) {
 
         const education = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $push: { education: education } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $push: { education: education } }, { new: true });
         
         return response.status(200).json({ message: "Education Added Successfully." });
     }
@@ -36,7 +37,7 @@ async function addSkill(request, response) {
 
         const skill = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $push: { skill: skill } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $push: { skills: skill } }, { new: true });
         
         return response.status(200).json({ message: "Skill Added Successfully." });
     }
@@ -51,7 +52,7 @@ async function addProject(request, response) {
 
         const project = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $push: { projects: project } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $push: { projects: project } }, { new: true });
         
         return response.status(200).json({ message: "Project Added Successfully." });
     }
@@ -64,10 +65,8 @@ async function deleteSkill(request, response) {
     try {
         const skillId = request.headers.id;
         const email = request.email;
-
-        const skill = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $pull: { skill: { _id: skillId } } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $pull: { skills: { _id: skillId } } }, { new: true });
         
         return response.status(200).json({ message: "Skill Deleted Successfully." });
     }
@@ -80,10 +79,8 @@ async function deleteProject(request, response) {
     try {
         const projectId = request.headers.id;
         const email = request.email;
-
-        const project = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $pull: { projects: { _id: projectId } } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $pull: { projects: { _id: projectId } } }, { new: true });
         
         return response.status(200).json({ message: "Project Deleted Successfully." });
     }
@@ -96,10 +93,8 @@ async function deleteEducation(request, response) {
     try {
         const educationId = request.headers.id;
         const email = request.email;
-
-        const education = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $pull: { education: { _id: educationId } } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $pull: { education: { _id: educationId } } }, { new: true });
         
         return response.status(200).json({ message: "Education Deleted Successfully." });
     }
@@ -112,10 +107,8 @@ async function deleteExperience(request, response) {
     try {
         const experienceId = request.headers.id;
         const email = request.email;
-
-        const experience = request.body;
         
-        const user = await User.findOneAndUpdate({ email }, { $pull: { experience: { _id: experienceId } } }, { new: true });
+        await User.findOneAndUpdate({ email }, { $pull: { experience: { _id: experienceId } } }, { new: true });
         
         return response.status(200).json({ message: "Experience Deleted Successfully." });
     }
@@ -124,4 +117,24 @@ async function deleteExperience(request, response) {
     }
 }
 
-export { addEducation, addExperience, addSkill, addProject, deleteEducation, deleteExperience, deleteSkill, deleteProject }
+async function uploadResume(request, response) {
+    try {
+        const email = request.email;
+        const fileBuffer = request.file.buffer;
+        const base64 = `data:${request.file.mimetype};base64,${fileBuffer.toString('base64')}`
+
+        const result = await cloudinary.uploader.upload(base64, {
+            folder: "uploads",
+            resource_type: "raw"
+        });
+
+        await User.findOneAndUpdate({ email }, { resume: result.secure_url })
+        
+        return response.status(200).json({ message: "Resume Uploaded Successfully." });
+    }
+    catch (error) {
+        return response.status(500).json({ message: error.message });
+    }
+}
+
+export { addEducation, addExperience, addSkill, addProject, deleteEducation, deleteExperience, deleteSkill, deleteProject, uploadResume }

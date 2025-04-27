@@ -30,7 +30,7 @@ const StyledBox = styled(Box)(({theme}) => ({
 }))
 
 const JobBox = () => {
-  const { setJobs } = useContext(JobContext);
+  const { setJobs, setJob } = useContext(JobContext);
   const { employer } = useContext(EmployerContext);
   const [loading, setLoading] = useState(false);
   const [filteredInternships, setFilteredInternships] = useState([]);
@@ -63,6 +63,11 @@ const JobBox = () => {
         setOpen(true);
 
     else navigate("/employer/payments")
+  }
+
+  const handleJobDetail = (element) => {
+    setJob(element);
+    navigate(`/employer/job-details/${element._id}`)
   }
 
   return (
@@ -118,7 +123,10 @@ const JobBox = () => {
                                                 element.close_status ? 
                                                 <Button disabled>Job Closed</Button>
                                                 :<Button onClick={() => {setId(element._id); setOpenChange(true);}}>Close Job</Button>}
-                                            <Button>View Applications</Button>
+                                            <Box style={{display: 'flex'}}>
+                                                <Button style={{ marginRight: "10px" }} onClick={() => handleJobDetail(element)}>View Job</Button>
+                                                <Button onClick={() => navigate(`/employer/view-job-application/${element._id}`)}>View Applications</Button>
+                                            </Box>
                                         </Box>
                                     </StyledBox>
                                 )
@@ -164,7 +172,10 @@ const JobBox = () => {
                                                 element.close_status ? 
                                                 <Button disabled>Job Closed</Button>
                                                 :<Button onClick={() => {setId(element._id); setOpenChange(true);}}>Close Job</Button>}
-                                            <Button>View Applications</Button>
+                                            <Box style={{display: 'flex'}}>
+                                                <Button style={{ marginRight: "10px" }} onClick={() => handleJobDetail(element)}>View Job</Button>
+                                                <Button onClick={() => navigate(`/employer/view-job-application/${element._id}`)}>View Applications</Button>
+                                            </Box>
                                         </Box>
                                     </StyledBox>
                                 )

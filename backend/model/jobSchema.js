@@ -16,6 +16,10 @@ const jobSchema = new mongoose.Schema({
     },
     salary: {
         type: Number,
+        required: true
+    },
+    experience_required: {
+        type: Number,
         default: 0
     },
     questions: {
@@ -34,6 +38,10 @@ const jobSchema = new mongoose.Schema({
     job_status: {
         type: String,
         default: "Pending"
+    },
+    location: {
+        type: String,
+        default: "Remote"
     },
     skills: {
         type: Array,

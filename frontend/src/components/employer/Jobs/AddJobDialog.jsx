@@ -11,7 +11,7 @@ const AnotherTextField = styled(TextField)(({theme}) => ({
 }))
 
 const AddJobDialog = ({ open, setOpen }) => {
-  const [input, setInput] = useState({ job_title: "", skills: [], job_description: "", type: "", salary: "", duration: "", questions: "" });
+  const [input, setInput] = useState({ job_title: "", location: "", experience_required: "", skills: [], job_description: "", type: "", salary: "", duration: "", questions: "" });
   const [loading, setLoading] = useState(false);
   const [skill, setSkill] = useState("");
 
@@ -103,6 +103,27 @@ const AddJobDialog = ({ open, setOpen }) => {
                     value={input.salary}
                     onChange={handleChange}
                     required
+                /> <br />
+                <NewTextField 
+                    margin="normal"
+                    label="Location"
+                    type="text"
+                    size="small"
+                    helperText="Fill Remote for remote jobs."
+                    id="location"
+                    value={input.location}
+                    onChange={handleChange}
+                    required
+                /> <br />
+                <NewTextField 
+                    margin="normal"
+                    label="Experience Required"
+                    type="number"
+                    size="small"
+                    helperText="Leave Empty for Freshers"
+                    id="experience_required"
+                    value={input.experience_required}
+                    onChange={handleChange}
                 /> <br />
                 <NewTextField 
                     margin="normal"

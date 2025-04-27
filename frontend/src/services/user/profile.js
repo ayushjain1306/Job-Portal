@@ -47,7 +47,7 @@ async function addProject(project) {
 
 async function deleteExperience(experience) {
     try {
-        await axios.delete(`${URL}/user-delete-experience`, experience, { withCredentials: true });
+        await axios.delete(`${URL}/user-delete-experience`, { headers: { id: experience }, withCredentials: true });
 
         return true;
     }
@@ -58,7 +58,7 @@ async function deleteExperience(experience) {
 
 async function deleteSkill(skill) {
     try {
-        await axios.delete(`${URL}/user-delete-skill`, skill, { withCredentials: true });
+        await axios.delete(`${URL}/user-delete-skill`, { headers: { id: skill }, withCredentials: true });
 
         return true;
     }
@@ -69,7 +69,7 @@ async function deleteSkill(skill) {
 
 async function deleteEducation(education) {
     try {
-        await axios.delete(`${URL}/user-delete-education`, education, { withCredentials: true });
+        await axios.delete(`${URL}/user-delete-education`, { headers: { id: education }, withCredentials: true });
 
         return true;
     }
@@ -80,7 +80,7 @@ async function deleteEducation(education) {
 
 async function deleteProject(project) {
     try {
-        await axios.delete(`${URL}/user-delete-project`, project, { withCredentials: true });
+        await axios.delete(`${URL}/user-delete-project`, { headers: { id: project }, withCredentials: true });
 
         return true;
     }
@@ -89,4 +89,19 @@ async function deleteProject(project) {
     }
 }
 
-export { addEducation, addExperience, addSkill, addProject, deleteEducation, deleteExperience, deleteProject, deleteSkill }
+async function uploadResume(resume) {
+    try {
+        const formData = new FormData();
+
+        formData.append("file", resume);
+
+        await axios.post(`${URL}/user-upload-resume`, formData, { withCredentials: true });
+
+        return true;
+    }
+    catch (error) {
+        return false;
+    }
+}
+
+export { addEducation, addExperience, addSkill, addProject, deleteEducation, deleteExperience, deleteProject, deleteSkill, uploadResume }

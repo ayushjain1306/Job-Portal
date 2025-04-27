@@ -6,6 +6,9 @@ import { UserContext } from '../../context/user/UserProvider';
 import { getUserDetails } from '../../services/user/account';
 import { Outlet, Link } from 'react-router-dom';
 import Account from './home/Account';
+import { JobsContext } from '../../context/user/JobsProvider';
+import { topJobs } from '../../services/user/jobs';
+import Footer from '../../utils/Footer';
 
 const LinkStyle = {
     color: "inherit",
@@ -18,8 +21,9 @@ const LinkStyle = {
 }
 
 const UserCommon = () => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, loadAgain } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
+  const { setJobsLoading, setTopJobs } = useContext(JobsContext);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -29,8 +33,16 @@ const UserCommon = () => {
         setLoading(false);
     }
 
+    const fetchTopJobs = async () => {
+        setJobsLoading(true);
+        const result = await topJobs();
+        setTopJobs(result);
+        setJobsLoading(false);
+    }
+
     fetchUserDetails();
-  }, [])
+    fetchTopJobs();
+  }, [loadAgain])
 
   return (
     loading ?
@@ -38,9 +50,10 @@ const UserCommon = () => {
         <CircularProgress />
     </Box>
     :
-    <Box style={{ backgroundColor: "#ebebe9", minHeight: "88vh", width: "100%", paddingTop: "12vh"}}>
+    <Box style={{ backgroundColor: "#ebebe9", minHeight: "88vh", width: "100%", paddingTop: "12vh", paddingBottom: "2vh"}}>
         <Header InsideSecondSection={SecondSection} />
         <Outlet />
+        <Footer />
     </Box>
   )
 }
@@ -65,8 +78,10 @@ const SecondSection = () => {
                 :
                 <Link style={LinkStyle} onClick={() => setOpen(true)}><Login style={{marginRight: "5px"}} />Login</Link>
             }
-
-            <Account open={open} setOpen={setOpen} type={type} setType={setType} />
+            
+            {
+                open && <Account open={open} setOpen={setOpen} type={type} setType={setType} />
+            }
             
         </React.Fragment>
     )

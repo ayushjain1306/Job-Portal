@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, styled, Button } from "@mui/material";
+import image2 from "../../../assets/image2.png";
 
 const NewBox = styled(Box)(({theme}) => ({
     width: "95%",
@@ -9,12 +10,15 @@ const NewBox = styled(Box)(({theme}) => ({
     boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
     height: "70vh",
     paddingTop: "5vh",
+    paddingBottom: "5vh",
     marginBottom: "2vh",
-    paddingLeft: "2vw"
+    paddingLeft: "2vw",
+    display: "flex",
+    alignItems: "center"
 }))
 
 const TitleBox = styled(Box)(({theme}) => ({
-    width: "40%",
+    width: "80%",
     fontSize: "50px",
     marginBottom: "5vh",
     fontWeight: "600"
@@ -23,11 +27,16 @@ const TitleBox = styled(Box)(({theme}) => ({
 const HeroSection = () => {
   return (
     <NewBox>
-        <TitleBox>
-            Hire the Skilled, Experienced and Qualified Candidates for your Company.
-        </TitleBox>
+        <Box style={{width: "50%"}}>
+          <TitleBox>
+              Hire the Skilled, Experienced and Qualified Candidates for your Company.
+          </TitleBox>
 
-        <Button variant="contained" style={{fontWeight: "bold"}} color="warning">Start Posting Job</Button>
+          <Button variant="contained" style={{fontWeight: "bold"}} color="warning">Start Posting Job</Button>
+        </Box>
+        <Box style={{width: "50%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+          <img src={image2} alt="hero-pic" style={{ height: "70vh" }} />
+        </Box>
     </NewBox>
   )
 }

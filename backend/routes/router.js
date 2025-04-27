@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import userAuth from "../middleware/userAuth.js";
 import adminAuth from "../middleware/adminAuth.js";
 import employerAuth from "../middleware/employerAuth.js";
@@ -12,9 +13,15 @@ import { addSkill, deleteSkill, getSkills } from "../controllers/admin/skills.js
 import { getSubsriptionPlans, payment } from "../controllers/employer/paymentsController.js";
 import { getAllPayments } from "../controllers/admin/paymentsController.js";
 import { getDashboardData, getSalesData, getTopSellingSubscriptions, getYears } from "../controllers/admin/dashboardController.js";
-import { addEducation, addExperience, addProject, addSkill as addSkills, deleteEducation, deleteExperience, deleteProject, deleteSkill as deleteSkills } from "../controllers/user/profileController.js";
+import { addEducation, addExperience, addProject, addSkill as addSkills, deleteEducation, deleteExperience, deleteProject, deleteSkill as deleteSkills, uploadResume } from "../controllers/user/profileController.js";
+import { searchJobs, topJobs, getJobDetails } from "../controllers/user/jobController.js";
+import { applyToJob, checkJobApplication } from "../controllers/user/jobApplications.js";
+import { getJobApplications, hireApplication, shortlistApplication } from "../controllers/employer/jobApplicationController.js";
 
 const router = express.Router();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.get('/', (request, response) => {
     response.send("Hello from Server.");
@@ -29,10 +36,16 @@ router.post('/user-add-experience', userAuth, addExperience);
 router.post('/user-add-education', userAuth, addEducation);
 router.post('/user-add-skill', userAuth, addSkills);
 router.post('/user-add-project', userAuth, addProject);
-router.post('/user-delete-experience', userAuth, deleteExperience);
-router.post('/user-delete-education', userAuth, deleteEducation);
-router.post('/user-delete-skill', userAuth, deleteSkills);
-router.post('/user-delete-project', userAuth, deleteProject);
+router.delete('/user-delete-experience', userAuth, deleteExperience);
+router.delete('/user-delete-education', userAuth, deleteEducation);
+router.delete('/user-delete-skill', userAuth, deleteSkills);
+router.delete('/user-delete-project', userAuth, deleteProject);
+router.post('/user-upload-resume', userAuth, upload.single('file'), uploadResume);
+router.get('/user-get-top-jobs', topJobs);
+router.post('/user-get-searched-jobs', searchJobs);
+router.get('/user-get-job-detail', getJobDetails);
+router.post('/user-apply-to-job', userAuth, applyToJob);
+router.post('/user-check-application', userAuth, checkJobApplication);
 
 // Admin Routes
 router.get('/admin-get-account-details', adminAuth, getAdminAccountDetails);
@@ -63,5 +76,8 @@ router.post("/employer-add-job", employerAuth, addEmployerJob);
 router.put("/employer-change-job-status", employerAuth, changeJobStatus);
 router.get("/employer-get-all-subscription-plans", employerAuth, getSubsriptionPlans);
 router.post('/employer-purchase-subscription', employerAuth, payment);
+router.get('/employer-get-job-applications', employerAuth, getJobApplications);
+router.post('/employer-shortlist-application', employerAuth, shortlistApplication);
+router.post('/employer-hire-application', employerAuth, hireApplication);
 
 export default router;

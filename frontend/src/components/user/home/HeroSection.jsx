@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { Box, TextField, styled, InputAdornment, MenuItem, Button } from "@mui/material";
+import React, { useContext, useState } from 'react';
+import { Box, TextField, styled, Backdrop, CircularProgress, InputAdornment, MenuItem, Button } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { searchedJobs } from '../../../services/user/jobs';
+import { JobsContext } from '../../../context/user/JobsProvider';
+import { useNavigate } from 'react-router-dom';
 
 const NewBox = styled(Box)(({theme}) => ({
     width: "97%",
@@ -36,14 +39,33 @@ const AnotherTextField = styled(TextField)(({theme}) => ({
 }))
 
 const HeroSection = () => {
-  const [input, setInput] = useState({ job: "", location: "", experience: "" });
+  const { input, setInput, setSearchedJobs, setTopType } = useContext(JobsContext);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate("/")
 
   const handleChange = (e) => {
+    if (e.target.name === "experience") {
+      setInput({ ...input, experience: e.target.value });
+      return;
+    }
     setInput({ ...input, [e.target.id]: e.target.value })
+  }
+
+  const handleSearch = async () => {
+    setLoading(true);
+    const result = await searchedJobs(input);
+    setTopType(false);
+    setSearchedJobs(result);
+    setLoading(false);
+
+    navigate('/search-jobs');
   }
 
   return (
     <NewBox>
+        <Backdrop open={loading} sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}>
+            <CircularProgress color="inherit" />
+        </Backdrop>
         <TitleBox>
             Start Finding Your Job
         </TitleBox>
@@ -51,6 +73,7 @@ const HeroSection = () => {
             <NewTextField
                 placeholder="Search for your Job"
                 label="Find Your Job"
+                type="text"
                 variant="outlined"
                 id="job"
                 value={input.job}
@@ -80,7 +103,7 @@ const HeroSection = () => {
                 variant="outlined"
                 select
                 label="Select Experience"
-                id="experience"
+                name="experience"
                 value={input.experience}
                 onChange={handleChange}
             >
@@ -93,7 +116,7 @@ const HeroSection = () => {
             
         </SearchBox>
 
-        <Button variant="contained" style={{fontWeight: "bold"}} color="warning">Search</Button>
+        <Button variant="contained" style={{fontWeight: "bold"}} color="warning" onClick={handleSearch}>Search</Button>
     </NewBox>
   )
 }

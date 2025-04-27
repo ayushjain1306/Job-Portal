@@ -2,8 +2,7 @@ import React from 'react';
 import { Box, styled } from "@mui/material";
 import Header from '../../header/Header';
 import HeroSection from './HeroSection';
-import TopCompanies from './TopCompanies';
-import TopFields from './TopFields';
+import TopJobs from './TopJobs';
 
 const NewBox = styled(Box)(({theme}) => ({
     backgroundColor: "#ebebe9",
@@ -15,8 +14,7 @@ const Home = () => {
   return (
     <NewBox>
         <HeroSection />
-        <TopCompanies />
-        <TopFields />
+        <TopJobs />
     </NewBox>
   )
 }
