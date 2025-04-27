@@ -50,11 +50,12 @@ const UserCommon = () => {
         <CircularProgress />
     </Box>
     :
-    <Box style={{ backgroundColor: "#ebebe9", minHeight: "88vh", width: "100%", paddingTop: "12vh", paddingBottom: "2vh"}}>
+    <><Box style={{ backgroundColor: "#ebebe9", minHeight: "88vh", width: "100%", paddingTop: "12vh", paddingBottom: "2vh"}}>
         <Header InsideSecondSection={SecondSection} />
         <Outlet />
+        </Box>
         <Footer />
-    </Box>
+    </>
   )
 }
 
