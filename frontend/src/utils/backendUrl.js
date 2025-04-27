@@ -1,1 +1,1 @@
-export const URL = "https://job-portal-server-ivory-six.vercel.app/";
+export const URL = "https://job-portal-server-ivory-six.vercel.app";
