@@ -25,10 +25,13 @@ const InputBox = styled(Box)(({theme}) => ({
 }))
 
 const NewTextField = styled(TextField)(({theme}) => ({
-  width: "30%"
+  width: "30%",
+  [theme.breakpoints.down('sm')]: {
+    width: "70%"
+  }
 }))
 
-const steps = ['Personal Details', 'Company Details', 'Subscription Plan'];
+const steps = ['Personal Details', 'Company Details'];
 const targets = [
   {
     name: "Name",
@@ -53,10 +56,6 @@ const targets = [
   {
     name: "Company Website",
     element: "company_website"
-  },
-  {
-    name: "Subscription Plan",
-    element: "subsciption_plan"
   }
 ]
 
@@ -246,8 +245,7 @@ const EmployerRegistration = () => {
                   required
                 /> <br />
               </InputBox>
-              : activeStep === 1 
-              ?
+              : 
               <InputBox>
                 <NewTextField
                   onChange={handleChange}
@@ -281,10 +279,6 @@ const EmployerRegistration = () => {
                   margin="normal"
                   size="small"
                 /> <br />
-              </InputBox>
-              :
-              <InputBox>
-              
               </InputBox>
             }
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
