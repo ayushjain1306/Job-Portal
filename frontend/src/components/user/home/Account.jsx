@@ -5,7 +5,10 @@ import { userLogin, userSignup } from '../../../services/user/account';
 import Swal from "sweetalert2";
 
 const NewTextField = styled(TextField)(({theme}) => ({
-    width: "25vw"
+    width: "25vw",
+    [theme.breakpoints.down('sm')]: {
+        width: "100%"
+    }
 }))
 
 const Account = ({ open, setOpen, type, setType }) => {

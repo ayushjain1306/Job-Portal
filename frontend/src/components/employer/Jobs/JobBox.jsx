@@ -26,7 +26,10 @@ const StyledBox = styled(Box)(({theme}) => ({
     marginBottom: "2vh",
     borderRadius: "3px",
     boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    [theme.breakpoints.down('sm')]: {
+        width: "80%"
+    }
 }))
 
 const JobBox = () => {

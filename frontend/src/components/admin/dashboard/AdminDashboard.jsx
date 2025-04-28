@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Backdrop, Table, TableBody, TableCell, TableRow, CircularProgress, styled, Typography } from "@mui/material";
+import { Box, Backdrop, Table, TableBody, TableCell, TableRow, Drawer, CircularProgress, styled, Typography } from "@mui/material";
 import { adminLogout, getAdminData } from "../../../services/admin/adminAccount";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AdminContext } from '../../../context/admin/AdminProvider';
@@ -146,6 +146,44 @@ const AdminDashboard = () => {
                     <StyledMenu fontSize="large" onClick={() => setOpen(true)} />
                     <Outlet />
                 </OutletBox>
+                <Drawer open={open} onClose={() => setOpen(false)}>
+                <div>
+                        <HeadTypo>Company Logo & Name</HeadTypo>
+                        <Table className="table" id="dashboard-table">
+                            <TableBody>
+                                <TableRow><TableCell></TableCell></TableRow>
+                                {
+                                    elements.map((element) => {
+                                        return (
+                                            <TableRow key={element.id}>
+                                                <TableCell>
+                                                    <Link style={{ color: "inherit", fontWeight: "600", textDecoration: "none", display: "flex", alignItems: "center" }} to={element.url}>
+                                                        <element.Component fontSize="small" style={{ marginRight: "10px" }} />
+                                                        {element.name}
+                                                    </Link>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    })
+                                }
+                            </TableBody>
+                        </Table>
+                    </div>
+                    <div>
+                        <Table className="table" style={{marginBottom: "0vh"}}>
+                            <TableBody>
+                                <TableRow><TableCell></TableCell></TableRow>
+                                <TableRow>
+                                    <TableCell style={{textAlign: "left"}}>
+                                        <Link style={{color: "inherit", fontWeight: "600", textDecoration: "inherit", display: "flex", alignItems: "center"}} onClick={handleClick}>
+                                            <Logout fontSize="small" style={{marginRight: "10px"}} /> Logout
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </div>
+                </Drawer>
             </NewBox>
         }
         

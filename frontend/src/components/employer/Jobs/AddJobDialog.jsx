@@ -4,10 +4,16 @@ import { createJob } from '../../../services/employer/jobs';
 import Swal from "sweetalert2";
 
 const NewTextField = styled(TextField)(({theme}) => ({
-    width: "25vw"
+    width: "25vw",
+    [theme.breakpoints.down('sm')]: {
+        width: "55vw"
+    }
 }))
 const AnotherTextField = styled(TextField)(({theme}) => ({
-    width: "20vw"
+    width: "20vw",
+    [theme.breakpoints.down('sm')]: {
+        width: "50vw"
+    }
 }))
 
 const AddJobDialog = ({ open, setOpen }) => {

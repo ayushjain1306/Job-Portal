@@ -26,13 +26,19 @@ const SearchBox = styled(Box)(({theme}) => ({
 
 const NewTextField = styled(TextField)(({theme}) => ({
   marginRight: "10px",
-  width: "27%"
+  width: "27%",
+  [theme.breakpoints.down('sm')]: {
+        width: "33%"
+  }
 }))
 
 const AnotherTextField = styled(TextField)(({theme}) => ({
   marginRight: "10px",
   width: "15%",
-  textAlign: "left"
+  textAlign: "left",
+  [theme.breakpoints.down('sm')]: {
+    width: "25%"
+  }
 }))
 
 const SearchJobs = () => {

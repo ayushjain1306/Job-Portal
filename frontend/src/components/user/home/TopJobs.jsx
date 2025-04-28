@@ -11,7 +11,7 @@ const NewBox = styled(Box)(({theme}) => ({
     borderRadius: "3px",
     boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
     textAlign: "center",
-    height: "40vh",
+    minHeight: "40vh",
     paddingTop: "3vh",
     marginBottom: "2vh",
     paddingBottom: "6vh"
@@ -26,7 +26,10 @@ const TitleBox = styled(Box)(({theme}) => ({
 const CompaniesBox = styled(Box)(({theme}) => ({
     display: "grid",
     padding: "0px 15%",
-    gridTemplateColumns: "25% 25% 25% 25%"
+    gridTemplateColumns: "25% 25% 25% 25%",
+    [theme.breakpoints.down('sm')]: {
+        gridTemplateColumns: "50% 50%"
+    }
 }))
 
 const StyledBox = styled(Box)(({theme}) => ({
@@ -46,11 +49,12 @@ const TopJobs = () => {
         <TitleBox>
             Top Jobs For You
         </TitleBox>
+        {
+            jobsLoading ? 
+            <Box style={{ textAlign: "center", padding: "2vh 0%" }}><CircularProgress /></Box>
+            :
         <CompaniesBox>
             {
-                jobsLoading ? 
-                <CircularProgress />
-                :
                 topJobs.map((job, index) => {
                     return (
                         <StyledBox key={index}>
@@ -62,6 +66,7 @@ const TopJobs = () => {
                 })
             }
         </CompaniesBox>
+        }
         <Box style={{ textAlign: "center", marginTop: "4vh" }}>
             <Button variant="contained" color="warning" endIcon={<ChevronRight/>} onClick={() =>{setTopType(true); navigate("/search-jobs");}}>Explore More Jobs</Button>
         </Box>

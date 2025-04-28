@@ -22,6 +22,9 @@ const StyledBox = styled(Box)(({ theme }) => ({
     marginTop: "2vh",
     padding: "2vh 2%",
     width: "60%",
+    [theme.breakpoints.down('sm')]: {
+        width: "80%"
+    }
 }));
 
 const OutputJobs = () => {

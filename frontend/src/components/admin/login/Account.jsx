@@ -10,7 +10,10 @@ const NewBox = styled(Box)(({theme}) => ({
     borderRadius: "3px",
     boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
     height: "70vh",
-    width: "50%"
+    width: "50%",
+    [theme.breakpoints.down('sm')]: {
+        width: "70%"
+    }
 }))
 
 const Title = styled(Typography)(({theme}) => ({

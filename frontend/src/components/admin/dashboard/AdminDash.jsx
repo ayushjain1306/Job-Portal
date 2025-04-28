@@ -24,7 +24,8 @@ const CardBox = styled(Box)(({ theme }) => ({
   height: "20vh",
   [theme.breakpoints.down('sm')]: {
       marginTop: "2vh",
-      height: "15vh"
+      height: "15vh",
+      width: "85%"
   },
   [theme.breakpoints.between('sm', 'lg')]: {
       height: "13vh"

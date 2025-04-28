@@ -6,7 +6,10 @@ import Account from './Account';
 const NewBox = styled(Box)(({theme}) => ({
     height: "100vh",
     width: "100%",
-    display: "flex"
+    display: "flex",
+    [theme.breakpoints.down('sm')]: {
+        display: "block"
+    }
 }))
 
 const AnotherBox = styled(Box)(({theme}) => ({
@@ -15,12 +18,19 @@ const AnotherBox = styled(Box)(({theme}) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ebebe9"
+    backgroundColor: "#ebebe9",
+    [theme.breakpoints.down('sm')]: {
+        width: "100%",
+        height: "70vh"
+    }
 }))
 
 const ImageStyle = styled('img')(({theme}) => ({
     height: "80vh",
-    width: "70%"
+    width: "70%",
+    [theme.breakpoints.down('sm')]: {
+        height: "50vh"
+    }
 }))
 
 const AdminLogin = () => {

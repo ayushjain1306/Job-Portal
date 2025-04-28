@@ -19,7 +19,10 @@ const AnotherBox = styled(Box)(({theme}) => ({
   boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
   padding: "2vh 2%",
   margin: "auto",
-  marginBottom: "2vh"
+  marginBottom: "2vh",
+  [theme.breakpoints.down('sm')]: {
+      width: "80%"
+  }
 }))
 
 const JobApplications = () => {
@@ -75,8 +78,8 @@ const JobApplications = () => {
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} centered aria-label="lab API tabs example">
               <Tab label="All Applications" value="1" />
-              <Tab label="Shortlisted Applications" value="2" />
-              <Tab label="Hired Applications" value="3" />
+              <Tab label="Shortlisted" value="2" />
+              <Tab label="Hired" value="3" />
             </TabList>
           </Box>
           <TabPanel value="1">

@@ -10,7 +10,10 @@ const NewBox = styled(Box)(({theme}) => ({
   boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
   width: "70%",
   margin: "auto",
-  padding: "5vh 2% 2vh 2%"
+  padding: "5vh 2% 2vh 2%",
+  [theme.breakpoints.down('sm')]: {
+      width: "85%"
+  }
 }))
 
 const AnotherBox = styled(Box)(({theme}) => ({
@@ -60,7 +63,7 @@ const JobDetails = () => {
       <Typography style={{ fontWeight: "bold", marginTop: "5vh", marginBottom: "2vh" }}>Skills Required</Typography>
       {
         job.skills.map((skill, index) => {
-          return <Chip key={index} label={skill} style={{ marginRight: "10px" }} />
+          return <Chip key={index} label={skill} style={{ marginRight: "10px", marginTop: "2vh" }} />
         })
       }
 

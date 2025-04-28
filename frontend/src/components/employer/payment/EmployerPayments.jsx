@@ -37,7 +37,10 @@ const InsideBox = styled(Box)(({theme}) => ({
 
 const GridBox = styled(Box)(({theme}) => ({
     display: "grid",
-    gridTemplateColumns: "20% 20% 20% 20% 20%"
+    gridTemplateColumns: "20% 20% 20% 20% 20%",
+    [theme.breakpoints.down('sm')]: {
+        gridTemplateColumns: "50% 50%"
+    }
 }))
 
 const EmployerPayments = () => {

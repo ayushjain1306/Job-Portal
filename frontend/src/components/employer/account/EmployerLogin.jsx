@@ -20,7 +20,10 @@ const AnotherBox = styled(Box)(({theme}) => ({
     width: "30%",
     borderRadius: "3px",
     boxShadow: "8px 8px 8px -3px rgba(0,0,0,0.2)",
-    textAlign: "center"
+    textAlign: "center",
+    [theme.breakpoints.down('sm')]: {
+        width: "70%"
+    }
 }))
 
 const HeadTitle = styled(Typography)(({theme}) => ({
